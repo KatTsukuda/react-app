@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Header from './components/Header'
 
 class App extends Component {
@@ -12,4 +12,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;
