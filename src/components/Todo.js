@@ -12,7 +12,9 @@ class Todo extends Component {
             onClick={() => this.props.onDeleteTodo(this.props.todo)}>(X)
           </span>
         </p>
-        <EditTodoForm />
+        <EditTodoForm
+        todo={this.props.todo}
+        onUpdateTodo={this.props.onUpdateTodo} />
       </div>
     )
   }

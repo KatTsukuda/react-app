@@ -32,21 +32,36 @@ class TodosContainer extends Component {
       this.setState({newTodos})
     })
   }
-  deleteTodo(todo){
+  deleteTodo(todo) {
     console.log('deleting todo', todo)
     TodoModel.delete(todo).then((res) => {
-      let todos = this.state.todos.filter(function(todo) {
-        return todo._id !== res._id
-      });
-      this.setState({todos})
+        let todos = this.state.todos.filter(function(todo) {
+          return todo._id !== res._id
+        });
+        this.setState({todos})
+    })
+  }
+  updateTodo(newTodoBody, id) {
+    console.log('updating todo in TodosContainer')
+    // access id of todo to be updated (param)
+    // access new info for the todo (param)
+    // call TodoModel.update to make AJAX call
+    TodoModel.update(newTodoBody, id).then((res)=> {
+      let targetTodo = this.state.todos.find((item)=>{
+        return item._id === id;
+      })
+      // update this.state.todos based on response
+      targetTodo.body = res.body
     })
   }
   render(){
     return (
       <div className='todosContainer'>
-        <CreateTodoForm createTodo={this.createTodo.bind(this)} />
+        <CreateTodoForm
+          createTodo={this.createTodo.bind(this)} />
         <TodoList
           todos={this.state.todos}
+          onUpdateTodo={this.updateTodo.bind(this)}
           onDeleteTodo={this.deleteTodo.bind(this)} />
       </div>
     )
